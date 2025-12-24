@@ -1,10 +1,12 @@
 # ETL Pipeline
-Implements **ETL (Extract, Transform, Load) pipeline** using Python and Pandas.
+Implements a structured **ETL (Extract, Transform, Load) pipeline** using Python and Pandas.
 
 ## Features
 - Extracts raw data from CSV files
-- Transforms and cleans the data by enforcing a schema
-- Loads the processed data into Parquet files
+- Transforms and cleans data by enforcing schema
+- Loads processed data into Parquet format
+- Handles missing values using centralized NA markers
+- Generates run metadata (_run_meta.json) for reproducibility
 
 ## Project Structure
 ```
@@ -13,30 +15,20 @@ Implements **ETL (Extract, Transform, Load) pipeline** using Python and Pandas.
 │   ├── cache
 │   ├── external
 │   ├── processed
-│   │   ├── orders.parquet
-│   │   └── users.parquet
 │   └── raw
 │       ├── orders.csv
 │       └── users.csv
 ├── images
 │   ├── processed.png
-│   ├── project_structure.png
 │   └── raw.png
-├── main.py
 ├── pyproject.toml
 ├── README.md
-├── reports
-│   └── figures
+├── requirements.txt
 ├── scripts
 │   └── run_day1_load.py
 ├── src
-│   └── data_workflow
+│   └── bootcamp_data
 │       ├── __init__.py
-│       ├── __pycache__
-│       │   ├── __init__.cpython-311.pyc
-│       │   ├── config.cpython-311.pyc
-│       │   ├── io.cpython-311.pyc
-│       │   └── transforms.cpython-311.pyc
 │       ├── config.py
 │       ├── io.py
 │       └── transforms.py

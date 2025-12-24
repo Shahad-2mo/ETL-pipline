@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-
 @dataclass(frozen=True)
 class Paths:
     root: Path
@@ -9,7 +8,6 @@ class Paths:
     cache: Path
     processed: Path
     external: Path
-
 
 def make_paths(root: Path) -> Paths:
     data = root / "data"
