@@ -23,7 +23,6 @@ Implements a structured **ETL (Extract, Transform, Load) pipeline** using Python
 │   └── raw.png
 ├── pyproject.toml
 ├── README.md
-├── requirements.txt
 ├── scripts
 │   └── run_day1_load.py
 ├── src
