@@ -1,21 +1,23 @@
-# ETL Pipeline with Data Quality, Joins & Analytics
-Structured ETL pipeline with data quality validation, datetimes, outliers, joinsusing Python and Pandas.
+# ETL Pipeline with EDA & Visualization
+Structured ETL pipeline with data quality validation, analytics table construction, and exploratory data analysis using Python, Pandas, and Plotly.
 
-## Features
 - Extracts and validates CSV data
 - Enforces schema and type validation
 - Creates missingness reports and adds missing value flags
 - Normalizes text data
-- Adds missing value flags
 - Parses datetime columns and extracts time components
 - Performs safe left joins with validation
-- Detects outliers
+- Detects and handles outliers
+- Builds analytics tables for analysis
+- Generates interactive visualizations with Plotly
 - Exports to Parquet with logging
 
 ## Project Structure
 ```
 .
 ├── data
+│   ├── cache
+│   ├── external
 │   ├── processed
 │   │   ├── _run_meta.json
 │   │   ├── analytics_table.parquet
@@ -25,14 +27,17 @@ Structured ETL pipeline with data quality validation, datetimes, outliers, joins
 │   └── raw
 │       ├── orders.csv
 │       └── users.csv
-├── images
-│   ├── processed_day1.png
-│   ├── processed_day2.png
-│   └── raw.png
+├── notebooks
+│   └── eda.ipynb
 ├── pyproject.toml
 ├── README.md
 ├── reports
 │   ├── figures
+│   │   ├── amount_distribution.png
+│   │   ├── revenue_by_country.png
+│   │   ├── revenue_trend_monthly.png
+│   │   ├── status_distribution.png
+│   │   └── top10_countries.png
 │   └── missingness_orders.csv
 ├── scripts
 │   ├── run_day1_load.py
@@ -45,7 +50,9 @@ Structured ETL pipeline with data quality validation, datetimes, outliers, joins
 │       ├── io.py
 │       ├── joins.py
 │       ├── quality.py
-│       └── transforms.py
+│       ├── transforms.py
+│       ├── utils.py
+│       └── viz.py
 └── uv.lock
 ```
 
@@ -74,40 +81,38 @@ Structured ETL pipeline with data quality validation, datetimes, outliers, joins
 - Install dependencies:
 
     ```
-    uv add pandas pyarrow httpx
+    uv add pandas pyarrow httpx plotly kaleido nbformat
     ```
 
-##  How to Run
-**Important: Scripts must be run in sequential order**
-### Day 1: Basic ETL Pipeline
-From the project root, run:
+## How to Run
 
-```
+**Important: Scripts must be run in sequential order**
+
+### Day 1: Basic ETL Pipeline
+
+From the project root, run:
+```bash
 python scripts/run_day1_load.py
 ```
-### Day 2: Data Quality and Cleaning
-From the project root, run:
 
-```
+### Day 2: Data Quality and Cleaning
+
+From the project root, run:
+```bash
 python scripts/run_day2_clean.py
 ```
+
 ### Day 3: Analytics Table Construction
+
 From the project root, run:
-
-## Example Input/Output
-**Input: orders.csv**
-
-<img src="images/raw.png" width="400">
-
-
-**output: orders.parquet**
-
-<img src="images/processed_day1.png" width="400">
-
-
-**output: orders_clean.parquet**
-
-<img src="images/processed_day2.png" width="400">
-```
+```bash
 python scripts/run_day3_build_analytics.py
 ```
+### Day 4: Exploratory Data Analysis
+
+Open and run the Jupyter notebook:
+```bash
+jupyter notebook notebooks/eda.ipynb
+```
+
+Or use VS Code to open `notebooks/eda.ipynb` and run all cells.
