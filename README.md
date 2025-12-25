@@ -1,6 +1,7 @@
 # ETL Pipeline with EDA & Visualization
 Structured ETL pipeline with data quality validation, analytics table construction, and exploratory data analysis using Python, Pandas, and Plotly.
 
+## Features
 - Extracts and validates CSV data
 - Enforces schema and type validation
 - Creates missingness reports and adds missing value flags
@@ -11,6 +12,8 @@ Structured ETL pipeline with data quality validation, analytics table constructi
 - Builds analytics tables for analysis
 - Generates interactive visualizations with Plotly
 - Exports to Parquet with logging
+- Production-ready ETL orchestration
+- Run metadata generation for reproducibility
 
 ## Project Structure
 ```
@@ -38,15 +41,18 @@ Structured ETL pipeline with data quality validation, analytics table constructi
 │   │   ├── revenue_trend_monthly.png
 │   │   ├── status_distribution.png
 │   │   └── top10_countries.png
-│   └── missingness_orders.csv
+│   ├── missingness_orders.csv
+│   └── summary.md
 ├── scripts
 │   ├── run_day1_load.py
 │   ├── run_day2_clean.py
-│   └── run_day3_build_analytics.py
+│   ├── run_day3_build_analytics.py
+│   └── run_etl.py
 ├── src
 │   └── data_workflow
 │       ├── __init__.py
 │       ├── config.py
+│       ├── etl.py
 │       ├── io.py
 │       ├── joins.py
 │       ├── quality.py
@@ -108,6 +114,7 @@ From the project root, run:
 ```bash
 python scripts/run_day3_build_analytics.py
 ```
+
 ### Day 4: Exploratory Data Analysis
 
 Open and run the Jupyter notebook:
@@ -116,3 +123,10 @@ jupyter notebook notebooks/eda.ipynb
 ```
 
 Or use VS Code to open `notebooks/eda.ipynb` and run all cells.
+
+### Day 5: Production ETL Pipeline
+
+From the project root, run:
+```bash
+python scripts/run_etl.py
+```
