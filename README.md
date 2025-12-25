@@ -30,6 +30,7 @@ Structured ETL pipeline with data quality validation using Python and Pandas.
 ├── pyproject.toml
 ├── README.md
 ├── reports
+│   ├── figures
 │   └── missingness_orders.csv
 ├── scripts
 │   ├── run_day1_load.py
