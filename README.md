@@ -1,12 +1,14 @@
-# ETL Pipeline
-Implements a structured **ETL (Extract, Transform, Load) pipeline** using Python and Pandas.
+# ETL Pipeline & Data Quality Checks
+Structured ETL pipeline with data quality validation using Python and Pandas.
 
 ## Features
-- Extracts raw data from CSV files
-- Transforms and cleans data by enforcing schema
-- Loads processed data into Parquet format
-- Handles missing values using centralized NA markers
-- Generates run metadata (_run_meta.json) for reproducibility
+- Extracts and validates CSV data
+- Enforces schema and type validation
+- Creates missingness reports
+- Normalizes text data
+- Adds missing value flags
+- Exports to Parquet format
+- Generates logging output
 
 ## Project Structure
 ```
@@ -15,21 +17,29 @@ Implements a structured **ETL (Extract, Transform, Load) pipeline** using Python
 │   ├── cache
 │   ├── external
 │   ├── processed
+│   │   ├── orders.parquet
+│   │   ├── orders_clean.parquet
+│   │   └── users.parquet
 │   └── raw
 │       ├── orders.csv
 │       └── users.csv
 ├── images
-│   ├── processed.png
+│   ├── processed_day1.png
+│   ├── processed_day2.png
 │   └── raw.png
 ├── pyproject.toml
 ├── README.md
+├── reports
+│   └── missingness_orders.csv
 ├── scripts
-│   └── run_day1_load.py
+│   ├── run_day1_load.py
+│   └── run_day2_clean.py
 ├── src
-│   └── bootcamp_data
+│   └── data_workflow
 │       ├── __init__.py
 │       ├── config.py
 │       ├── io.py
+│       ├── quality.py
 │       └── transforms.py
 └── uv.lock
 ```
@@ -62,11 +72,18 @@ Implements a structured **ETL (Extract, Transform, Load) pipeline** using Python
     uv add pandas pyarrow httpx
     ```
 
-## How to Run the Pipeline
+##  How to Run
+### Day 1: Basic ETL Pipeline
 From the project root, run:
 
 ```
 python scripts/run_day1_load.py
+```
+### Day 2: Data Quality and Cleaning
+From the project root, run:
+
+```
+python scripts/run_day2_clean.py
 ```
 
 ## Example Input/Output
@@ -74,6 +91,12 @@ python scripts/run_day1_load.py
 
 <img src="images/raw.png" width="400">
 
-**Output: orders.parquet**
 
-<img src="images/processed.png" width="400">
+**output: orders.parquet**
+
+<img src="images/processed_day1.png" width="400">
+
+
+**output: orders_clean.parquet**
+
+<img src="images/processed_day2.png" width="400">
