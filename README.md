@@ -1,24 +1,26 @@
-# ETL Pipeline & Data Quality Checks
-Structured ETL pipeline with data quality validation using Python and Pandas.
+# ETL Pipeline with Data Quality, Joins & Analytics
+Structured ETL pipeline with data quality validation, datetimes, outliers, joinsusing Python and Pandas.
 
 ## Features
 - Extracts and validates CSV data
 - Enforces schema and type validation
-- Creates missingness reports
+- Creates missingness reports and adds missing value flags
 - Normalizes text data
 - Adds missing value flags
-- Exports to Parquet format
-- Generates logging output
+- Parses datetime columns and extracts time components
+- Performs safe left joins with validation
+- Detects outliers
+- Exports to Parquet with logging
 
 ## Project Structure
 ```
 .
 ├── data
-│   ├── cache
-│   ├── external
 │   ├── processed
-│   │   ├── orders.parquet
+│   │   ├── _run_meta.json
+│   │   ├── analytics_table.parquet
 │   │   ├── orders_clean.parquet
+│   │   ├── orders.parquet
 │   │   └── users.parquet
 │   └── raw
 │       ├── orders.csv
@@ -34,12 +36,14 @@ Structured ETL pipeline with data quality validation using Python and Pandas.
 │   └── missingness_orders.csv
 ├── scripts
 │   ├── run_day1_load.py
-│   └── run_day2_clean.py
+│   ├── run_day2_clean.py
+│   └── run_day3_build_analytics.py
 ├── src
 │   └── data_workflow
 │       ├── __init__.py
 │       ├── config.py
 │       ├── io.py
+│       ├── joins.py
 │       ├── quality.py
 │       └── transforms.py
 └── uv.lock
@@ -74,6 +78,7 @@ Structured ETL pipeline with data quality validation using Python and Pandas.
     ```
 
 ##  How to Run
+**Important: Scripts must be run in sequential order**
 ### Day 1: Basic ETL Pipeline
 From the project root, run:
 
@@ -86,6 +91,8 @@ From the project root, run:
 ```
 python scripts/run_day2_clean.py
 ```
+### Day 3: Analytics Table Construction
+From the project root, run:
 
 ## Example Input/Output
 **Input: orders.csv**
@@ -101,3 +108,6 @@ python scripts/run_day2_clean.py
 **output: orders_clean.parquet**
 
 <img src="images/processed_day2.png" width="400">
+```
+python scripts/run_day3_build_analytics.py
+```
